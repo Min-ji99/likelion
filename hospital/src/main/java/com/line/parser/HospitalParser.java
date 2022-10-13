@@ -23,14 +23,13 @@ public class HospitalParser implements Parser<Hospital>{ //parser T도 Hospital 
         return splitAddress[0]+' '+splitAddress[1];
     }
     public String getSubdivision(String name){
-        String result="";
         String[] subdivisions={"치과", "소아과", "이비인후과", "피부과", "내과", "성형외과", "외과", "산부인과", "안과", "비뇨기과", "가정", "한의원", "한방"};
         for(String subdividison: subdivisions){
             if (name.contains(subdividison)){
-                result=subdividison;
+                return subdividison;
             }
         }
-        return result;
+        return "";
     }
 
 }

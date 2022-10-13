@@ -1,5 +1,6 @@
 package com.line.parser;
 
+import com.line.CreateFile;
 import com.line.domain.Hospital;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,10 @@ class HospitalParserTest {
     void name() {
         HospitalParser hospitalParser = new HospitalParser();
         Hospital hospital = hospitalParser.parse(this.line);
-
+        CreateFile createFile = new CreateFile("./sql");
+        String sql = "INSERT INTO `seoulhospital`.`seoul_hospital` (`id`, `address`, `district`, `category`, `emergency_room`, `name`, `subdivision`) VALUES ('A1105895', '서울특별시 서초구 서초대로77길 59 강남역 2차 I\\'PARK 지하1층 3층 (서초동)', '서울특별시 서초구', 'C', 2, '에르네의원', null);\n";
+        Assertions.assertEquals(sql, createFile.getInsert(hospital));
+        /*
         Assertions.assertEquals("A1105895", hospital.getId());
         Assertions.assertEquals("서울특별시 서초구 서초대로77길 59 강남역 2차 I\\'PARK 지하1층 3층 (서초동)", hospital.getAddress());
         Assertions.assertEquals("서울특별시 서초구", hospital.getDistrict());
@@ -20,6 +24,7 @@ class HospitalParserTest {
         Assertions.assertEquals(2, hospital.getEmergencyRoom());
         Assertions.assertEquals("에르네의원", hospital.getName());
         Assertions.assertEquals("", hospital.getSubdivision());
+         */
     }
 
 }

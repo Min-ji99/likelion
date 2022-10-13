@@ -30,9 +30,9 @@ public class CreateFile {
                 + "', " + hospital.getEmergencyRoom() + ", '" + hospital.getName()+"', ";
 
         if (hospital.getSubdivision().length()>0){
-            insertQuery+="'"+hospital.getSubdivision()+"')\n;";
+            insertQuery+="'"+hospital.getSubdivision()+"');\n";
         }else{
-            insertQuery+="null)\n;";
+            insertQuery+="null);\n";
         }
         return insertQuery;
 
