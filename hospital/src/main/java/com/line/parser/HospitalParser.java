@@ -8,9 +8,11 @@ public class HospitalParser implements Parser<Hospital>{ //parser T도 Hospital 
     @Override
     public Hospital parse(String str){
         //0번째 id 1번째 주소(address) 2번째 병원분류(category) 6번째 응급실운영여부(emergency room) 10번째 병원이름(name)
-        if (str.contains("`")) {
-            str=str.replaceAll("\'", "\\\'");
+        if(str.contains("'")){
+            str=str.replace("'", "\\'");
+            System.out.println(str);
         }
+
         String[] splitted = str.split(",");
         String district=getDistrict(splitted[1]);
         //System.out.println(district);

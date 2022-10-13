@@ -12,7 +12,7 @@ public class Main {
         String filename="/Users/minji/Documents/likelion/file/서울시 병의원 위치 정보.csv";
         List<Hospital> hospitals = hospitalLineReader.readLines(filename);
 
-        String address="/Users/minji/Documents/likelion/MySQL/hospital.sql";
+        String address="/Users/minji/Documents/likelion/MySQL/hospitalInsert.sql";
         CreateFile createFile = new CreateFile(address);
         createFile.write(hospitals);
 

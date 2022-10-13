@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HospitalParserTest {
-    String line = "A1120837,서울특별시 금천구 벚꽃로 286 삼성리더스타워 111~114호 (가산동),C,의원,G099,응급의료기관 이외,2,외과: 상시진료 내과는 당분간 휴진,서울시 송파구 문정동 장지동 법조단지 위례 가락동 가락시장역 위치 삼성서울병원 외래교수 출신 구강외과 전문의 진료 진료과목 - 임플란트 치조골 뼈이식 수술 매복 사랑니 발치 턱관절 악관절 질환의 치료 교정 치료 및 기타 보존 보철(크라운 브릿지 인레이) 신경치료,방이역 1번출구 바로옆 굿모닝 신한증권 뒷건물,가산기대찬의원,02-6267-2580,02-920-5374,1930,1930,1930,1930,1930,1500,1500,1500,900,900,900,900,900,900,1000,1000,85,11,126.8841225,37.4803938,2022.4.7 14:55";
+    String line="A1105895,서울특별시 서초구 서초대로77길 59 강남역 2차 I'PARK 지하1층 3층 (서초동),C,의원,G099,응급의료기관 이외,2,공휴일진료는 상황에따라 약간의변동이 있습니다.,구산역 2번 출구 도보 50미터 이내에 위치한 한의원 입니다.,신논현역 6번 출구 아이파크 2차 오피스텔,에르네의원,02-518-7591,070-4698-7811,2100,2100,2100,2100,2100,1700,1500,1400,1100,1100,1100,1100,1100,1100,930,930,66,11,127.0239803,37.5022778,2022.9.7 14:55";
     @Test
     void name() {
         HospitalParser hospitalParser = new HospitalParser();
         Hospital hospital = hospitalParser.parse(this.line);
-        Assertions.assertEquals("A1120837", hospital.getId());
+        Assertions.assertEquals("A1105895", hospital.getId());
+        Assertions.assertEquals("서울특별시 서초구 서초대로77길 59 강남역 2차 I\\'PARK 지하1층 3층 (서초동)", hospital.getAddress());
     }
 
 }
