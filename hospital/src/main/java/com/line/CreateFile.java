@@ -24,10 +24,17 @@ public class CreateFile {
         bw.close();
     }
     public String getInsert(Hospital hospital) {
-        return "INSERT INTO `seoulhospital`.`seoul_hospital` (`id`, `address`, " +
+        String insertQuery="INSERT INTO `seoulhospital`.`seoul_hospital` (`id`, `address`, " +
                 "`district`, `category`, `emergency_room`, `name`, `subdivision`) VALUES ('"
                 + hospital.getId() + "', '" + hospital.getAddress() + "', '" + hospital.getDistrict() + "', '" + hospital.getCategory()
-                + "', " + hospital.getEmergencyRoom() + ", '" + hospital.getName() + "', null);\n";
+                + "', " + hospital.getEmergencyRoom() + ", '" + hospital.getName()+"', ";
+
+        if (hospital.getSubdivision().length()>0){
+            insertQuery+="'"+hospital.getSubdivision()+"')\n;";
+        }else{
+            insertQuery+="null)\n;";
+        }
+        return insertQuery;
 
     }
 }

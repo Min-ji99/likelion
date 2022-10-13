@@ -12,8 +12,14 @@ class HospitalParserTest {
     void name() {
         HospitalParser hospitalParser = new HospitalParser();
         Hospital hospital = hospitalParser.parse(this.line);
+
         Assertions.assertEquals("A1105895", hospital.getId());
         Assertions.assertEquals("서울특별시 서초구 서초대로77길 59 강남역 2차 I\\'PARK 지하1층 3층 (서초동)", hospital.getAddress());
+        Assertions.assertEquals("서울특별시 서초구", hospital.getDistrict());
+        Assertions.assertEquals("C", hospital.getCategory());
+        Assertions.assertEquals(2, hospital.getEmergencyRoom());
+        Assertions.assertEquals("에르네의원", hospital.getName());
+        Assertions.assertEquals("", hospital.getSubdivision());
     }
 
 }
