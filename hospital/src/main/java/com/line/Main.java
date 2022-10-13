@@ -17,7 +17,4 @@ public class Main {
         createFile.write(hospitals);
 
     }
-
-    public static class Query {
-    }
 }
