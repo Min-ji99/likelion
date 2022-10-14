@@ -4,19 +4,14 @@ import java.util.Arrays;
 
 public class InsertionSort01 {
     public void sort(int[] arr){
-        int i=1;
-        if(arr[i]<arr[i-1]){
-            swap(arr, i-1, i);
-        }
-        /*
         for(int i=1; i<arr.length; i++){
-            for(int j=i-1; j>0; j--){
-                if(arr[j]<arr[j-1]){
-                    swap(arr, j-1, j);
+            for(int j=i; j>0; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    swap(arr, j - 1, j);
                 }
             }
         }
-        */
+
     }
     public void swap(int[] arr, int i, int j){
         int tmp=arr[i];
