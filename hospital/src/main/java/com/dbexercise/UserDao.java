@@ -1,9 +1,9 @@
 package com.dbexercise;
 
 
+import com.dbexercise.domain.User;
+
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class UserDao {
@@ -24,7 +24,7 @@ public class UserDao {
         ps.close();
         conn.close();
     }
-    public List<User> searchId(String id) throws ClassNotFoundException, SQLException {
+    public User searchId(String id) throws ClassNotFoundException, SQLException {
         Map<String, String> env = System.getenv();
         String dbHost=env.get("DB_HOST");
         String dbUser=env.get("DB_USER");
@@ -37,21 +37,20 @@ public class UserDao {
         Statement stmt = conn.createStatement();
         ResultSet result=stmt.executeQuery(query);
 
-        List<User> users = new ArrayList<>();
+        User user=new User();
         while(result.next()){
-            users.add(new User(result.getString("id"), result.getString("name"), result.getString("password")));
+            user.setId(result.getString("id"));
+            user.setName(result.getString("name"));
+            user.setPassword(result.getString("password"));
         }
 
         conn.close();
-        return users;
+        return user;
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         UserDao userDao = new UserDao();
         //userDao.add();
-        List<User> users=new ArrayList<>();
-        users=userDao.searchId("0");
-        for(User user : users){
-            user.printUserInfo();
-        }
+        User user=userDao.searchId("0");
+        user.printUserInfo();
     }
 }
