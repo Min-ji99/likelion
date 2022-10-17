@@ -17,6 +17,20 @@ public class RightTriangle {
             }
             System.out.println();
         }
+
+    }
+    public void printLeftTriangle(int n){
+
+        for(int i=0; i<n; i++){
+            for(int j=n-i-1; j>0; j--){
+                System.out.print(" ");
+            }
+            for(int j=0; j<i+1; j++){
+                System.out.print(c);
+            }
+            System.out.println();
+        }
+
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -25,5 +39,7 @@ public class RightTriangle {
 
         RightTriangle rt = new RightTriangle(c);
         rt.printRightTriangle(n);
+        System.out.println("===============");
+        rt.printLeftTriangle(n);
     }
 }
