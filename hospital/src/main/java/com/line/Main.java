@@ -4,17 +4,22 @@ import com.line.domain.Hospital;
 import com.line.parser.HospitalParser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        LineReader<Hospital> hospitalLineReader = new LineReader<>(new HospitalParser());
-        String filename="/Users/minji/Documents/likelion/file/서울시 병의원 위치 정보.csv";
-        List<Hospital> hospitals = hospitalLineReader.readLines(filename);
+        FileController<Hospital> hospitalFileController = new FileController<>(new HospitalParser());
+        String readFilename="/Users/minji/Documents/likelion/file/서울시 병의원 위치 정보.csv";
+        List<Hospital> hospitals = hospitalFileController.readLines(readFilename);
+        List<String> sqlStatements= new ArrayList<>();
+        for(Hospital hospital : hospitals){
+            sqlStatements.add(hospital.getInsert2());
+        }
 
-        String address="/Users/minji/Documents/likelion/MySQL/hospitalInsert.sql";
-        CreateFile createFile = new CreateFile(address);
-        createFile.write(hospitals);
+        String createFilename="/Users/minji/Documents/likelion/MySQL/hospitalInsert.sql";
+
+        hospitalFileController.writeLines(sqlStatements, createFilename);
 
     }
 }
