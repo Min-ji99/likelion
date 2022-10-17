@@ -54,3 +54,19 @@
 |학습내용|분류|예제|
 |----|----|----|
 |알고리즘|버블정렬|BubbleSort|
+|codeup||1061~1070|
+|File, DB|TDD||
+
+**10/14**
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|삽입정렬|InsertionSort|
+|File, DB|TDD||
+
+## week5
+**10/14**
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|별찍기|RightTriangle, Pyramid, Diamond|
+|DB|DB 연동|UserDao|
+
