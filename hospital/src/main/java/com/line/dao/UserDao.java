@@ -9,16 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDao {
-    private Connection makeConnection() throws ClassNotFoundException, SQLException {
-        Map<String, String> env = System.getenv();
-        //Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD")); //db연결
-
-        return conn;
-    }
+    AwsConnectionMaker awsConnectionMaker = new AwsConnectionMaker();
     public void add(User user) {
         try {
-            Connection conn=makeConnection();
+            Connection conn=awsConnectionMaker.makeConnection();
             PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
             ps.setString(1, user.getId());
             ps.setString(2, user.getName());
@@ -29,14 +23,12 @@ public class UserDao {
             conn.close();
         }catch(SQLException e) {
             e.printStackTrace();
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
         }
 
     }
     public User searchId(String id) {
         try {
-            Connection conn=makeConnection();
+            Connection conn=awsConnectionMaker.makeConnection();
 
             String query = "Select * from users where id='" + id + "';";
             Statement stmt = conn.createStatement();
@@ -49,30 +41,26 @@ public class UserDao {
             return user;
         }catch(SQLException e){
             e.printStackTrace();
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
         }
         return null;
     }
-    public List<User> findAll() throws SQLException, ClassNotFoundException {
-        Map<String, String> env = System.getenv();
-        String dbHost=env.get("DB_HOST");
-        String dbUser=env.get("DB_USER");
-        String dbPassword=env.get("DB_PASSWORD");
+    public List<User> findAll(){
+        try {
+            Connection conn = awsConnectionMaker.makeConnection();
+            List<User> users = new ArrayList<>();
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword); //db연결
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery("Select * from users;");
 
-        List<User> users=new ArrayList<>();
-
-        Statement stmt=conn.createStatement();
-        ResultSet result=stmt.executeQuery("Select * from users;");
-
-        while(result.next()){
-            users.add(new User(result.getString("id"), result.getString("name"), result.getString("password")));
+            while (result.next()) {
+                users.add(new User(result.getString("id"), result.getString("name"), result.getString("password")));
+            }
+            return users;
+        }catch (SQLException e){
+            e.printStackTrace();
         }
 
-        return users;
+        return null;
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         UserDao userDao = new UserDao();

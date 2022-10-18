@@ -10,11 +10,11 @@ class UserDaoTest {
     @Test
     @DisplayName("users table insert 확인")
     void addAndSelect(){
-        AWSUserDaoImpl userDao = new AWSUserDaoImpl();
-        User user = new User("6", "jimin", "qwer");
+        UserDao userDao = new UserDao();
+        User user = new User("7", "jimin", "qwer");
         userDao.add(user);
 
-        User selectedUser = userDao.searchId("6");
+        User selectedUser = userDao.searchId("7");
         Assertions.assertEquals("jimin", selectedUser.getName());
     }
 }
