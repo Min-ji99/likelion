@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDao {
-    AwsConnectionMaker awsConnectionMaker = new AwsConnectionMaker();
+    AwsConnectionMaker awsConnectionMaker;
+    public UserDao(){
+        this.awsConnectionMaker=new AwsConnectionMaker();
+    }
     public void add(User user) {
         try {
             Connection conn=awsConnectionMaker.makeConnection();
