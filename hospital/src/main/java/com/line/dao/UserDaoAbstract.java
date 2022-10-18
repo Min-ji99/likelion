@@ -1,21 +1,15 @@
-package com.dbexercise;
+package com.line.dao;
 
 
-import com.dbexercise.domain.User;
+import com.line.domain.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class UserDao {
-    private Connection makeConnection() throws ClassNotFoundException, SQLException {
-        Map<String, String> env = System.getenv();
-        //Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD")); //db연결
-
-        return conn;
-    }
+public abstract class UserDaoAbstract {
+    public abstract Connection makeConnection() throws SQLException;
     public void add(User user) {
         try {
             Connection conn=makeConnection();
@@ -29,8 +23,6 @@ public class UserDao {
             conn.close();
         }catch(SQLException e) {
             e.printStackTrace();
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
         }
 
     }
@@ -41,15 +33,16 @@ public class UserDao {
             String query = "Select * from users where id='" + id + "';";
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(query);
-            result.next();
-            User user = new User(result.getString("id"), result.getString("name"), result.getString("password"));
-
+            User user;
+            if(result.next()) {
+                user = new User(result.getString("id"), result.getString("name"), result.getString("password"));
+            }else{
+                user=new User();
+            }
             conn.close();
 
             return user;
         }catch(SQLException e){
-            e.printStackTrace();
-        }catch(ClassNotFoundException e){
             e.printStackTrace();
         }
         return null;
@@ -74,17 +67,5 @@ public class UserDao {
 
         return users;
     }
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao();
-        userDao.add(new User("2", "Ruru", "1234qwer"));
-        /*
-        User user=userDao.searchId("0");
-        user.printUserInfo();
-        */
 
-        List<User> users=new ArrayList<>();
-        for(User user : users){
-            user.printUserInfo();
-        }
-    }
 }
