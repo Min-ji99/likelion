@@ -1,12 +1,15 @@
-package com.line.parser;
+package com.line.dao;
 
+import com.line.FileController;
 import com.line.domain.Hospital;
+import com.line.parser.HospitalParser;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 import java.util.Map;
 
-public class HospitalParser implements Parser<Hospital>{ //parser T도 Hospital LineReader T도 Hospital
-    /*
+public class HospitalDao {
     public void add(Hospital hospital, Map<String, String> env){
 
         try{
@@ -50,33 +53,11 @@ public class HospitalParser implements Parser<Hospital>{ //parser T도 Hospital 
             e.printStackTrace();
         }
     }
-    */
-    @Override
-    public Hospital parse(String str){
-        //0번째 id 1번째 주소(address) 2번째 병원분류(category) 6번째 응급실운영여부(emergency room) 10번째 병원이름(name)
-        if(str.contains("'")){
-            str=str.replace("'", "\\'");
-            //str=str.replaceAll("'", "\\\\'");
-        }
 
-        String[] splitted = str.split(",");
-        String district=getDistrict(splitted[1]);
-        String subdivision=getSubdivision(splitted[10]);
-        //System.out.println(district);
-        return new Hospital(splitted[0], splitted[1], district, splitted[2], splitted[6], splitted[10], subdivision);
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        HospitalDao hospitalDao = new HospitalDao();
+        FileController<Hospital> hospitalFileController = new FileController<>(new HospitalParser());
+        String readFilename="/Users/minji/Documents/likelion/file/서울시 병의원 위치 정보.csv";
+        List<Hospital> hospitals = hospitalFileController.readLines(readFilename);
     }
-    public String getDistrict(String address){
-        String[] splitAddress=address.split(" ");
-        return splitAddress[0]+' '+splitAddress[1];
-    }
-    public String getSubdivision(String name){
-        String[] subdivisions={"치과", "소아과", "이비인후과", "피부과", "내과", "성형외과", "외과", "산부인과", "안과", "비뇨기과", "가정", "한의원", "한방"};
-        for(String subdividison: subdivisions){
-            if (name.contains(subdividison)){
-                return subdividison;
-            }
-        }
-        return "";
-    }
-
 }

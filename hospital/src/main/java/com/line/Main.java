@@ -18,13 +18,11 @@ public class Main {
         for(Hospital hospital : hospitals){
             hospitalParser.add(hospital, System.getenv());
         }
-        */
-
         hospitalParser.searchSubdivision("치과", System.getenv());
+        */
+        String createFilename="/Users/minji/Documents/likelion/MySQL/hospitalInsert.sql";
 
-        //String createFilename="/Users/minji/Documents/likelion/MySQL/hospitalInsert.sql";
-
-        //hospitalFileController.writeLines(sqlStatements, createFilename);
+        hospitalFileController.writeLines(sqlStatements, createFilename);
 
     }
 }
