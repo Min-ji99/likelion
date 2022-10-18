@@ -9,15 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDao {
-    public void add(User user) {
+    private Connection makeConnection() throws ClassNotFoundException, SQLException {
         Map<String, String> env = System.getenv();
-        try {
-            String dbHost = env.get("DB_HOST");
-            String dbUser = env.get("DB_USER");
-            String dbPassword = env.get("DB_PASSWORD");
+        //Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD")); //db연결
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword); //db연결
+        return conn;
+    }
+    public void add(User user) {
+        try {
+            Connection conn=makeConnection();
             PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
             ps.setString(1, user.getId());
             ps.setString(2, user.getName());
@@ -34,14 +35,8 @@ public class UserDao {
 
     }
     public User searchId(String id) {
-        Map<String, String> env = System.getenv();
         try {
-            String dbHost = env.get("DB_HOST");
-            String dbUser = env.get("DB_USER");
-            String dbPassword = env.get("DB_PASSWORD");
-
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword); //db연결
+            Connection conn=makeConnection();
 
             String query = "Select * from users where id='" + id + "';";
             Statement stmt = conn.createStatement();
