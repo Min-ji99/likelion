@@ -13,13 +13,18 @@ public class Main {
         String readFilename="/Users/minji/Documents/likelion/file/서울시 병의원 위치 정보.csv";
         List<Hospital> hospitals = hospitalFileController.readLines(readFilename);
         List<String> sqlStatements= new ArrayList<>();
+        HospitalParser hospitalParser=new HospitalParser();
+        /*
         for(Hospital hospital : hospitals){
-            sqlStatements.add(hospital.getInsert2());
+            hospitalParser.add(hospital, System.getenv());
         }
+        */
 
-        String createFilename="/Users/minji/Documents/likelion/MySQL/hospitalInsert.sql";
+        hospitalParser.searchSubdivision("치과", System.getenv());
 
-        hospitalFileController.writeLines(sqlStatements, createFilename);
+        //String createFilename="/Users/minji/Documents/likelion/MySQL/hospitalInsert.sql";
+
+        //hospitalFileController.writeLines(sqlStatements, createFilename);
 
     }
 }
