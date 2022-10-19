@@ -22,7 +22,8 @@ class UserDaoTest {
     @Test
     @DisplayName("users table insert 확인")
     void addAndSelect(){
-        UserDao userDao = new UserDaoFactory().awsUserDao();
+        //UserDao userDao = new UserDaoFactory().awsUserDao();
+        UserDao userDao = context.getBean("awsUserDao", UserDao.class);
         User user = new User("10", "nana", "2022");
         userDao.add(user);
 
