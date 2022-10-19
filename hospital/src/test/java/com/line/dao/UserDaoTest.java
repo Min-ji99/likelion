@@ -10,8 +10,8 @@ class UserDaoTest {
     @Test
     @DisplayName("users table insert 확인")
     void addAndSelect(){
-        UserDao userDao = new UserDao();
-        User user = new User("8", "nana", "2022");
+        UserDao userDao = new UserDaoFactory().awsUserDao();
+        User user = new User("9", "nana", "2022");
         userDao.add(user);
 
         User selectedUser = userDao.searchId("8");

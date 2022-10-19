@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDao {
-    AwsConnectionMaker awsConnectionMaker;
+    ConnectionMaker connectionMaker;
     public UserDao(){
-        this.awsConnectionMaker=new AwsConnectionMaker();
+        this.connectionMaker=new AwsConnectionMaker();
     }
+    public UserDao(ConnectionMaker connectionMaker){this.connectionMaker=connectionMaker;}
     public void add(User user) {
         try {
-            Connection conn=awsConnectionMaker.makeConnection();
+            Connection conn=connectionMaker.makeConnection();
             PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
             ps.setString(1, user.getId());
             ps.setString(2, user.getName());
@@ -31,7 +32,7 @@ public class UserDao {
     }
     public User searchId(String id) {
         try {
-            Connection conn=awsConnectionMaker.makeConnection();
+            Connection conn=connectionMaker.makeConnection();
 
             String query = "Select * from users where id='" + id + "';";
             Statement stmt = conn.createStatement();
@@ -49,7 +50,7 @@ public class UserDao {
     }
     public List<User> findAll(){
         try {
-            Connection conn = awsConnectionMaker.makeConnection();
+            Connection conn = connectionMaker.makeConnection();
             List<User> users = new ArrayList<>();
 
             Statement stmt = conn.createStatement();
@@ -58,6 +59,7 @@ public class UserDao {
             while (result.next()) {
                 users.add(new User(result.getString("id"), result.getString("name"), result.getString("password")));
             }
+            conn.close();
             return users;
         }catch (SQLException e){
             e.printStackTrace();
