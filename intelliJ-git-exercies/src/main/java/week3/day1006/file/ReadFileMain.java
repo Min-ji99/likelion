@@ -1,7 +1,6 @@
 package week3.day1006.file;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class ReadFileMain {

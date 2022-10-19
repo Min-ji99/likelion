@@ -1,4 +1,4 @@
-package week5.day1018.algorithm.codeup.codeup_1859;
+package week5.day1018.codeup.codeup_1859;
 
 import java.util.Scanner;
 

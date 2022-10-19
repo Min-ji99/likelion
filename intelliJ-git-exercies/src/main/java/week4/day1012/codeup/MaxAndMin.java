@@ -1,7 +1,5 @@
 package week4.day1012.codeup;
 
-import java.lang.constant.Constable;
-
 interface Compare{
     public boolean doSomething(int valueA, int valueB);
 }

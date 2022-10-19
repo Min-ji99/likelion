@@ -1,6 +1,5 @@
 package week3.day1005.collections;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListPracticeMain {
