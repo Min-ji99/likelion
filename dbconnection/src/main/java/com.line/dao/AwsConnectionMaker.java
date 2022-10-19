@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AWSUserDaoImpl extends UserDaoAbstract{
+public class AwsConnectionMaker implements ConnectionMaker{
     @Override
     public Connection makeConnection() throws SQLException {
         Map<String, String> env = System.getenv();
@@ -14,5 +14,4 @@ public class AWSUserDaoImpl extends UserDaoAbstract{
 
         return conn;
     }
-
 }
