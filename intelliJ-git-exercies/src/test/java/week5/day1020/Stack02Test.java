@@ -1,8 +1,11 @@
 package week5.day1020;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,5 +35,20 @@ class Stack02Test {
         assertEquals(10, st.pop());
         st.push(30);
         assertEquals(30, st.pop());
+        st.pop();
+    }
+    @Test
+    void isEmpty(){
+        Stack02 st = new Stack02();
+        st.push(10);
+        assertFalse(st.isEmpty());
+        st.pop();
+        assertTrue(st.isEmpty());
+
+    }
+    @Test
+    void realStack(){
+        Stack<Integer> st = new Stack<>();
+        st.pop();
     }
 }
