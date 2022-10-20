@@ -1,19 +1,14 @@
 package com.line.dao;
 
+import com.line.domain.User;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UserDaoFactory {
-    //조립
     @Bean
-    public UserDao awsUserDao(){
-        UserDao userDao=new UserDao(new AwsConnectionMaker());
-        return userDao;
+    UserDao awsUserDao(){
+        return new UserDao(new AwsConnectionMaker());
     }
-    /*
-    public UserDao localUserDao(){
-        UserDao userDao=new UserDao(new LocalConnectionMaker());
-        return userDao;
-    }*/
 }

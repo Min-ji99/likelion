@@ -1,19 +1,19 @@
 package com.line.dao;
 
-
 import com.line.domain.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UserDao {
-    ConnectionMaker connectionMaker;
+    private ConnectionMaker connectionMaker;
     public UserDao(){
         this.connectionMaker=new AwsConnectionMaker();
     }
-    public UserDao(ConnectionMaker connectionMaker){this.connectionMaker=connectionMaker;}
+    public UserDao(ConnectionMaker connectionMaker){
+        this.connectionMaker=connectionMaker;
+    }
     public void add(User user) {
         try {
             Connection conn=connectionMaker.makeConnection();
@@ -66,18 +66,5 @@ public class UserDao {
         }
 
         return null;
-    }
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao();
-        userDao.add(new User("2", "Ruru", "1234qwer"));
-        /*
-        User user=userDao.searchId("0");
-        user.printUserInfo();
-        */
-
-        List<User> users=new ArrayList<>();
-        for(User user : users){
-            user.printUserInfo();
-        }
     }
 }
