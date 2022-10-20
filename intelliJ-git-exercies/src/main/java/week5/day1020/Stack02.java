@@ -17,6 +17,7 @@ public class Stack02 {
     }
 
     public int pop(){
+        //비어있는 stack에서 pop을 하는 경우 예외처리
         if(isEmpty()) {throw new EmptyStackException();}
         return arr[--top];
     }
@@ -24,5 +25,10 @@ public class Stack02 {
     public boolean isEmpty() {
         if(top==0) {return true;}
         return false;
+    }
+
+    public int peek() {
+        if(isEmpty()){throw new EmptyStackException();}
+        return arr[top-1];
     }
 }

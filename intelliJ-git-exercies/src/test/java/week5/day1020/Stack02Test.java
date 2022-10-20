@@ -44,6 +44,7 @@ class Stack02Test {
         assertFalse(st.isEmpty());
         st.pop();
         assertTrue(st.isEmpty());
+        //예외처리 테스트 케이스
         assertThrows(EmptyStackException.class, ()->{
                 st.pop();
         });
@@ -51,6 +52,18 @@ class Stack02Test {
     @Test
     void realStack(){
         Stack<Integer> st = new Stack<>();
-        st.pop();
+        //st.pop();
+        st.peek();
+    }
+    @Test
+    void peek(){
+        Stack02 st = new Stack02();
+        //stackd이 비었는데 peek
+        assertThrows(EmptyStackException.class, ()->{
+            st.peek();
+        });
+        st.push(10);
+        int peek=st.peek();
+        assertEquals(10, peek);
     }
 }
