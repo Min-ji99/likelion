@@ -64,9 +64,26 @@
 |File, DB|TDD||
 
 ## week5
-**10/14**
+**10/17**
 |학습내용|분류|예제|
 |----|----|----|
 |알고리즘|별찍기|RightTriangle, Pyramid, Diamond|
 |DB|DB 연동|UserDao|
 
+**10/18**
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|별찍기|SquareStar, RectangleStar|
+|DB|DB 연동|UserDao class분리, interface 분리|
+
+**10/19**
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|Stack|push, pop|
+|DB|DB 연동|dbconnection-UserDaoFactory, spring|
+
+**10/20**
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|Stack|peek, isEmpty|
+|DB|DB 연동|dbconnection-spring|
