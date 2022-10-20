@@ -24,7 +24,7 @@ class UserDaoTest {
     void addAndSelect(){
         //UserDao userDao = new UserDaoFactory().awsUserDao();
         UserDao userDao = context.getBean("awsUserDao", UserDao.class);
-        User user = new User("10", "nana", "2022");
+        User user = new User("11", "nana", "2022");
         userDao.add(user);
 
         User selectedUser = userDao.searchId("8");
