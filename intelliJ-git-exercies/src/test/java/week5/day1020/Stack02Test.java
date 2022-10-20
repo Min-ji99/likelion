@@ -20,8 +20,8 @@ class Stack02Test {
         st.push(10);
         st.push(20);
         Integer[] arr=st.getArr();
-        assertEquals(10, arr[0]);
-        assertEquals(20, arr[1]);
+        assertEquals(20, arr[0]);
+        assertEquals(10, arr[1]);
     }
     @Test
     void pushAndPop() {
@@ -30,5 +30,7 @@ class Stack02Test {
         st.push(20);
         assertEquals(20, st.pop());
         assertEquals(10, st.pop());
+        st.push(30);
+        assertEquals(30, st.pop());
     }
 }

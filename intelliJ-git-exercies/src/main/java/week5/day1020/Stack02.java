@@ -15,8 +15,6 @@ public class Stack02 {
     }
 
     public int pop(){
-        int value=arr[top-1];
-        top--;
-        return value;
+        return arr[--top];
     }
 }
