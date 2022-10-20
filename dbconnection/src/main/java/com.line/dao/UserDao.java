@@ -16,18 +16,30 @@ public class UserDao {
         this.connectionMaker=connectionMaker;
     }
     public void add(User user) {
+        Connection conn=null;
+        PreparedStatement ps = null;
         try {
-            Connection conn=connectionMaker.makeConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
+            conn=connectionMaker.makeConnection();
+            ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
             ps.setString(1, user.getId());
             ps.setString(2, user.getName());
             ps.setString(3, user.getPassword());
 
             int status = ps.executeUpdate();
-            ps.close();
-            conn.close();
+
         }catch(SQLException e) {
             e.printStackTrace();
+        }finally {
+            if (ps != null) {
+                try{
+                    ps.close();
+                }catch(SQLException e){}
+            }
+            if(conn!=null){
+                try{
+                    conn.close();
+                }catch(SQLException e){}
+            }
         }
 
     }
@@ -71,12 +83,28 @@ public class UserDao {
     }
 
     public void deleteAll() throws SQLException{
-        Connection conn=connectionMaker.makeConnection();
-
-        PreparedStatement ps=conn.prepareStatement("delete from users");
-        ps.executeUpdate();
-        ps.close();
-        conn.close();;
+        Connection conn= null;
+        PreparedStatement ps= null;
+        try {
+            conn = connectionMaker.makeConnection();
+            ps = conn.prepareStatement("delete from users");
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            if(ps!=null){
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
+            if(conn!=null){
+                try{
+                    conn.close();
+                }catch(SQLException e){
+                }
+            }
+        }
     }
 
     public int getCount() throws SQLException{
