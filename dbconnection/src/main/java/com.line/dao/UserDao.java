@@ -1,6 +1,7 @@
 package com.line.dao;
 
 import com.line.domain.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,18 +31,19 @@ public class UserDao {
         }
 
     }
-    public User searchId(String id) {
+    public User findById(String id) {
         try {
             Connection conn=connectionMaker.makeConnection();
 
             String query = "Select * from users where id='" + id + "';";
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(query);
-            result.next();
-            User user = new User(result.getString("id"), result.getString("name"), result.getString("password"));
-
+            User user=null;
+            if(result.next()) {
+                user = new User(result.getString("id"), result.getString("name"), result.getString("password"));
+            }
             conn.close();
-
+            if(user==null) throw new EmptyResultDataAccessException(1);
             return user;
         }catch(SQLException e){
             e.printStackTrace();
