@@ -25,7 +25,7 @@ public class UserDao {
             ps.setString(2, user.getName());
             ps.setString(3, user.getPassword());
 
-            int status = ps.executeUpdate();
+            ps.executeUpdate();
 
         }catch(SQLException e) {
             e.printStackTrace();
@@ -44,79 +44,130 @@ public class UserDao {
 
     }
     public User findById(String id) {
+        Connection conn=null;
+        ResultSet result=null;
         try {
-            Connection conn=connectionMaker.makeConnection();
+            conn=connectionMaker.makeConnection();
 
             String query = "Select * from users where id='" + id + "';";
             Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(query);
+            result = stmt.executeQuery(query);
             User user=null;
             if(result.next()) {
                 user = new User(result.getString("id"), result.getString("name"), result.getString("password"));
             }
-            conn.close();
             if(user==null) throw new EmptyResultDataAccessException(1);
             return user;
-        }catch(SQLException e){
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(conn!=null){
+                try{
+                    conn.close();
+                }catch(SQLException e){
+
+                }
+            }
+            if(result!=null){
+                try{
+                    result.close();
+                }catch(SQLException e){
+
+                }
+            }
         }
-        return null;
     }
     public List<User> findAll(){
+        Connection conn=null;
+        ResultSet result=null;
         try {
-            Connection conn = connectionMaker.makeConnection();
+            conn = connectionMaker.makeConnection();
             List<User> users = new ArrayList<>();
 
             Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery("Select * from users;");
+            result = stmt.executeQuery("Select * from users;");
 
             while (result.next()) {
                 users.add(new User(result.getString("id"), result.getString("name"), result.getString("password")));
             }
-            conn.close();
             return users;
         }catch (SQLException e){
             e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public void deleteAll() throws SQLException{
-        Connection conn= null;
-        PreparedStatement ps= null;
-        try {
-            conn = connectionMaker.makeConnection();
-            ps = conn.prepareStatement("delete from users");
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }finally {
-            if(ps!=null){
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                }
-            }
+        }finally{
             if(conn!=null){
                 try{
                     conn.close();
                 }catch(SQLException e){
                 }
             }
+            if(result !=null){
+                try{
+                    result.close();
+                }catch(SQLException e){
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void deleteAll(){
+        Connection conn=null;
+        PreparedStatement ps=null;
+        try{
+            conn= connectionMaker.makeConnection();
+            ps=conn.prepareStatement("delete from users");
+            ps.executeUpdate();
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (conn != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
         }
     }
 
-    public int getCount() throws SQLException{
-        Connection conn= connectionMaker.makeConnection();
+    public int getCount(){
+        Connection conn= null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count= 0;
+        try {
+            conn = connectionMaker.makeConnection();
 
-        PreparedStatement ps = conn.prepareStatement("select count(*) from users");
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        int count=rs.getInt(1);
-        rs.close();
-        ps.close();
-        conn.close();
+            ps = conn.prepareStatement("select count(*) from users");
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally{
+            if(ps!=null){
+                try{
+                    ps.close();
+                }catch(SQLException e){}
+            }
+            if(conn!=null){
+                try{
+                    conn.close();
+                }catch(SQLException e){}
+            }
+            if(rs!=null){
+                try{
+                    rs.close();
+                }catch(SQLException e){}
+            }
+        }
 
         return count;
     }
