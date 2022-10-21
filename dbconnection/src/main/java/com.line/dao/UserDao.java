@@ -45,13 +45,13 @@ public class UserDao {
         PreparedStatement ps = null;
         try {
             conn=connectionMaker.makeConnection();
-
+            /*
             ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
             ps.setString(1, user.getId());
             ps.setString(2, user.getName());
             ps.setString(3, user.getPassword());
-
-            //ps=new AddStrategy().makePreparedStatement(conn);
+            */
+            ps=new AddStrategy(user).makePreparedStatement(conn);
             ps.executeUpdate();
 
         }catch(SQLException e) {
