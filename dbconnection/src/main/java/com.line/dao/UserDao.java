@@ -15,16 +15,43 @@ public class UserDao {
     public UserDao(ConnectionMaker connectionMaker){
         this.connectionMaker=connectionMaker;
     }
+
+    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException{
+        Connection conn=null;
+        PreparedStatement ps=null;
+        try{
+            conn= connectionMaker.makeConnection();
+            ps=stmt.makePreparedStatement(conn);
+            ps.executeUpdate();
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (conn != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
     public void add(User user) {
         Connection conn=null;
         PreparedStatement ps = null;
         try {
             conn=connectionMaker.makeConnection();
+
             ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
             ps.setString(1, user.getId());
             ps.setString(2, user.getName());
             ps.setString(3, user.getPassword());
 
+            //ps=new AddStrategy().makePreparedStatement(conn);
             ps.executeUpdate();
 
         }catch(SQLException e) {
@@ -111,29 +138,8 @@ public class UserDao {
         return null;
     }
 
-    public void deleteAll(){
-        Connection conn=null;
-        PreparedStatement ps=null;
-        try{
-            conn= connectionMaker.makeConnection();
-            ps=new DeleteAllStrategy().makePreparedStatement(conn);
-            ps.executeUpdate();
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (conn != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
+    public void deleteAll() throws SQLException {
+        jdbcContextWithStatementStrategy(new DeleteAllStrategy());
     }
 
     public int getCount(){
