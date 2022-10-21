@@ -64,6 +64,8 @@
 |File, DB|TDD||
 
 ## week5
+교재 : 토비의 스프링3
+
 **10/17**
 |학습내용|분류|예제|
 |----|----|----|
@@ -80,10 +82,16 @@
 |학습내용|분류|예제|
 |----|----|----|
 |알고리즘|Stack|push, pop|
-|DB|DB 연동|dbconnection-UserDaoFactory, spring|
+|Spring||dbconnection-UserDaoFactory|
 
 **10/20**
 |학습내용|분류|예제|
 |----|----|----|
 |알고리즘|Stack|peek, isEmpty|
-|DB|DB 연동|dbconnection-spring|
+|Spring||AwsConnectionMaker|
+
+**10/21**
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|스택|[PG_12909 올바른 괄호](https://school.programmers.co.kr/learn/courses/30/lessons/12909)|
+|Spring||StatementStrategy, AddStrategy, DeleteAllStrategy|
