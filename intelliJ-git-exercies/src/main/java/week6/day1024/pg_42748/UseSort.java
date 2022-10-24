@@ -1,9 +1,9 @@
-package week6.day1024;
+package week6.day1024.pg_42748;
 
 import java.util.Arrays;
 
-public class pg_42748 {
-    public static int[] solution(int[] array, int[][] commands) {
+public class UseSort {
+    public int[] solution(int[] array, int[][] commands) {
         int[] answer = new int[commands.length];
         int idx=0;
         for(int[] command:commands){
@@ -15,9 +15,10 @@ public class pg_42748 {
     }
 
     public static void main(String[] args) {
+        UseSort useSort = new UseSort();
         int[] array={1, 5, 2, 6, 3, 7, 4};
         int[][] commands={{2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
-        int[] answer=solution(array, commands);
+        int[] answer=useSort.solution(array, commands);
         System.out.println(Arrays.toString(answer));
     }
 }
