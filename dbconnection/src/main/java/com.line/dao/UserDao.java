@@ -10,38 +10,18 @@ import java.util.List;
 
 public class UserDao {
     private DataSource dataSource;
+    private JdbcContext jdbcContext;
     public UserDao(DataSource dataSource){
         this.dataSource=dataSource;
     }
 
-
-    private void jdbcContextWithStatementStrategy(StatementStrategy strategy) {
-        Connection conn=null;
-        PreparedStatement ps=null;
-        try{
-            conn= dataSource.getConnection();
-            ps=strategy.makePreparedStatement(conn);
-            ps.executeUpdate();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }finally {
-            if(ps!=null){
-                try{
-                    ps.close();
-                }catch (SQLException e){}
-            }
-            if(conn!=null){
-                try{
-                    conn.close();
-                }catch (SQLException e){
-                }
-            }
-        }
+    public void setJdbcContext(JdbcContext jdbcContext){
+        this.jdbcContext=jdbcContext;
     }
 
-    public void add(User user) {
+    public void add(final User user) throws SQLException {
         StatementStrategy st =new AddStrategy(user);
-        jdbcContextWithStatementStrategy(new StatementStrategy() {
+        this.jdbcContext.workWithStatementStrategy(new StatementStrategy() {
             public PreparedStatement makePreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps=connection.prepareStatement("Insert into users(id, name, password) values (?, ?, ?)");
                 ps.setString(1, user.getId());
@@ -121,7 +101,7 @@ public class UserDao {
     }
 
     public void deleteAll() throws SQLException {
-        jdbcContextWithStatementStrategy(new StatementStrategy() {
+        this.jdbcContext.workWithStatementStrategy(new StatementStrategy() {
             public PreparedStatement makePreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps=connection.prepareStatement("delete from users");
                 return ps;
