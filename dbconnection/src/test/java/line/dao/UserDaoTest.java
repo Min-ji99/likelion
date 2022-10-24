@@ -49,6 +49,13 @@ class UserDaoTest {
 
         assertEquals(user1.getName(), user.getName());
         assertEquals(user1.getPassword(), user.getPassword());
+
+        userDao.add(user2);
+        assertEquals(2, userDao.getCount());
+        user=userDao.findById(user2.getId());
+
+        assertEquals(user2.getName(), user.getName());
+        assertEquals(user2.getPassword(), user.getPassword());
     }
     @Test
     void count() throws SQLException{
