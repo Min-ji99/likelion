@@ -43,7 +43,15 @@ public class UserDao {
 
     public void add(User user) {
         StatementStrategy st =new AddStrategy(user);
-        jdbcContextWithStatementStrategy(st);
+        jdbcContextWithStatementStrategy(new StatementStrategy() {
+            public PreparedStatement makePreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps=connection.prepareStatement("Insert into users(id, name, password) values (?, ?, ?)");
+                ps.setString(1, user.getId());
+                ps.setString(2, user.getName());
+                ps.setString(3, user.getPassword());
+                return ps;
+            }
+        });
 
     }
     public User findById(String id) {
@@ -115,7 +123,12 @@ public class UserDao {
     }
 
     public void deleteAll() throws SQLException {
-        jdbcContextWithStatementStrategy(new DeleteAllStrategy());
+        jdbcContextWithStatementStrategy(new StatementStrategy() {
+            public PreparedStatement makePreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps=connection.prepareStatement("delete from users");
+                return ps;
+            }
+        });
     }
 
 
