@@ -101,12 +101,7 @@ public class UserDao {
     }
 
     public void deleteAll() throws SQLException {
-        this.jdbcContext.workWithStatementStrategy(new StatementStrategy() {
-            public PreparedStatement makePreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps=connection.prepareStatement("delete from users");
-                return ps;
-            }
-        });
+        this.jdbcContext.executeSQL("delete from users");
     }
 
 
