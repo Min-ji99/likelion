@@ -3,17 +3,15 @@ package com.line.dao;
 import com.line.domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
-    private ConnectionMaker connectionMaker;
-    public UserDao(){
-        this.connectionMaker=new AwsConnectionMaker();
-    }
-    public UserDao(ConnectionMaker connectionMaker){
-        this.connectionMaker=connectionMaker;
+    private DataSource dataSource;
+    public UserDao(DataSource dataSource){
+        this.dataSource=dataSource;
     }
 
 
@@ -21,7 +19,7 @@ public class UserDao {
         Connection conn=null;
         PreparedStatement ps=null;
         try{
-            conn= connectionMaker.makeConnection();
+            conn= dataSource.getConnection();
             ps=strategy.makePreparedStatement(conn);
             ps.executeUpdate();
         }catch (SQLException e){
@@ -58,7 +56,7 @@ public class UserDao {
         Connection conn=null;
         ResultSet result=null;
         try {
-            conn=connectionMaker.makeConnection();
+            conn=dataSource.getConnection();
 
             String query = "Select * from users where id='" + id + "';";
             Statement stmt = conn.createStatement();
@@ -92,7 +90,7 @@ public class UserDao {
         Connection conn=null;
         ResultSet result=null;
         try {
-            conn = connectionMaker.makeConnection();
+            conn = dataSource.getConnection();
             List<User> users = new ArrayList<>();
 
             Statement stmt = conn.createStatement();
@@ -138,7 +136,7 @@ public class UserDao {
         ResultSet rs = null;
         int count= 0;
         try {
-            conn = connectionMaker.makeConnection();
+            conn = dataSource.getConnection();
 
             ps = conn.prepareStatement("select count(*) from users");
             rs = ps.executeQuery();
