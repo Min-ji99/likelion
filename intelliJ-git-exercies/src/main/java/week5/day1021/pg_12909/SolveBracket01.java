@@ -4,9 +4,10 @@ import java.util.Stack;
 public class SolveBracket01 {
     boolean solution(String s){
         while(s.indexOf("()")>=0){
-            s=s.replace("()", "");
+            //s=s.replace("()", "");
+            String[] splitted=s.split("\\(\\)");
+            s=String.join("", splitted);
         }
-
         return s.length()==0;
     }
 
