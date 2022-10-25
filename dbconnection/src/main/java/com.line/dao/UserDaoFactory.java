@@ -40,9 +40,9 @@ public class UserDaoFactory {
         Map<String, String> env=System.getenv();
         SimpleDriverDataSource dataSource=new SimpleDriverDataSource();
         dataSource.setDriverClass(com.mysql.cj.jdbc.Driver.class);
-        dataSource.setUrl("localhost");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/likelion");
         dataSource.setUsername(env.get("minji"));
-        dataSource.setPassword(env.get("12345678"));
+        dataSource.setPassword(env.get("tndtlf1145l!"));
 
         return dataSource;
     }

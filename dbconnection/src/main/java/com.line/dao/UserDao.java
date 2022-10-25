@@ -14,6 +14,14 @@ import java.util.List;
 public class UserDao {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+    RowMapper<User> rowMapper=new RowMapper<User>() {
+        @Override
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+            User user=new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
+
+            return user;
+        }
+    };
     public UserDao(DataSource dataSource){
         this.jdbcTemplate=new JdbcTemplate(dataSource);
     }
@@ -30,47 +38,12 @@ public class UserDao {
 
     }
     public User findById(String id) {
-        RowMapper<User> rowMapper=new RowMapper<User>() {
-            @Override
-            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                User user=new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
-                return user;
-            }
-        };
+
         return this.jdbcTemplate.queryForObject("select * from users where id=?", rowMapper, id);
     }
     public List<User> findAll(){
-        Connection conn=null;
-        ResultSet result=null;
-        try {
-            conn = dataSource.getConnection();
-            List<User> users = new ArrayList<>();
 
-            Statement stmt = conn.createStatement();
-            result = stmt.executeQuery("Select * from users;");
-
-            while (result.next()) {
-                users.add(new User(result.getString("id"), result.getString("name"), result.getString("password")));
-            }
-            return users;
-        }catch (SQLException e){
-            e.printStackTrace();
-        }finally{
-            if(conn!=null){
-                try{
-                    conn.close();
-                }catch(SQLException e){
-                }
-            }
-            if(result !=null){
-                try{
-                    result.close();
-                }catch(SQLException e){
-                }
-            }
-        }
-
-        return null;
+        return this.jdbcTemplate.query("select * from users", rowMapper);
     }
 
     public int getCount(){
