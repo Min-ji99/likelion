@@ -1,8 +1,5 @@
-package week6.day1025.pg_42576;
+package week6.day1025;
 
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class HashTable {
     private int size = 10000;
