@@ -6,9 +6,9 @@ import java.util.List;
 public class HashTable2 {
     class Node{
         private String key;
-        private int value;
+        private Integer value;
 
-        public Node(String key, int value){
+        public Node(String key, Integer value){
             this.key=key;
             this.value=value;
         }
@@ -17,7 +17,7 @@ public class HashTable2 {
             return key;
         }
 
-        public int getValue() {
+        public Integer getValue() {
             return value;
         }
     }
@@ -31,7 +31,7 @@ public class HashTable2 {
         }
         return asciiSum % 1000;
     }
-    public void insert(String key, Integer value){
+    public void insert(String key, int value){
         int hashCode=hash(key);
         if(this.table[hashCode]==null){
             this.table[hashCode]=new ArrayList<>();
@@ -46,7 +46,7 @@ public class HashTable2 {
                 return node.value;
             }
         }
-        return null;
+        return -1;
     }
     public static void main(String[] args) {
         HashTable2 ht = new HashTable2();
