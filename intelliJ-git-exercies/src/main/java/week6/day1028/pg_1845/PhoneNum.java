@@ -1,5 +1,10 @@
 package week6.day1028.pg_1845;
-
+/*
+1. 폰켓몬 번호별로 몇마리 있는지 체크를 한다
+2. 가장 많은 폰켓몬을 선택하는 방법 중 폰켓몬의 종류를 찾아 반환을 한다.
+    1. 폰켓몬의 종류를 cnt한다.
+    2. 폰켓몬의 종류가 N/2보다 많이 가져갈 수 없기 때문에 check를 한다.
+ */
 import java.util.HashMap;
 import java.util.Map;
 
