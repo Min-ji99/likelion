@@ -19,10 +19,15 @@ class PhoneNumListTest {
         phone_book3=new String[]{"12","123","1235","567","88"};
     }
     @Test
-    void solutionTest(){
-        assertFalse(phoneNum.solution(phone_book1));
-        assertTrue(phoneNum.solution(phone_book2));
-        assertFalse(phoneNum.solution(phone_book3));
+    void solution1Test(){
+        assertFalse(phoneNum.solution1(phone_book1));
+        assertTrue(phoneNum.solution1(phone_book2));
+        assertFalse(phoneNum.solution1(phone_book3));
     }
-
+    @Test
+    void solution2Test(){
+        assertFalse(phoneNum.solution2(phone_book1));
+        assertTrue(phoneNum.solution2(phone_book2));
+        assertFalse(phoneNum.solution2(phone_book3));
+    }
 }
