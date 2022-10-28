@@ -8,7 +8,7 @@ package week6.day1028.pg_1845;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PhoneNum {
+public class Phonekemon {
     public int solution(int[] nums) {
         int answer = 0;
         Map<Integer, Integer> typeMap=new HashMap<>();
