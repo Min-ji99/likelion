@@ -22,10 +22,10 @@ class PrepareTestTest {
     }
     @Test
     void case1(){
-        assertEquals(result1, prepareTest.solution(answers1));
+        assertArrayEquals(result2, prepareTest.solution(answers2));
     }
     @Test
     void case2(){
-        assertEquals(result2, prepareTest.solution(answers2));
+        assertArrayEquals(result2, prepareTest.solution(answers2));
     }
 }

@@ -21,6 +21,19 @@ public class PrepareTest {
         }
         return score;
     }
+    public int[] findMaxPerson(int[] scores, int maxScore){
+        List<Integer> list=new ArrayList<>();
+        for(int i=0; i<scores.length; i++){
+            if(maxScore==scores[i]){
+                list.add(i+1);
+            }
+        }
+        int[] answer=new int[list.size()];
+        for(int i=0; i<answer.length; i++){
+            answer[i]=list.get(i);
+        }
+        return answer;
+    }
     public int[] solution(int[] answers) {
         int[] answer = {};
         int[][] pettern={{1, 2, 3, 4, 5}, {2, 1, 2, 3, 2, 4, 2, 5}, {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}};
@@ -33,7 +46,7 @@ public class PrepareTest {
                 maxScore=scores[i];
             }
         }
-
+        answer=prepareTest.findMaxPerson(scores, maxScore);
         return answer;
     }
 }
