@@ -27,6 +27,9 @@ public class PrepareTest {
         int maxScore=0;
         for(int i=0; i<pettern.length; i++){
             score[i]= prepareTest.calcScore(answers, pettern[i]);
+            if(maxScore>score[i]){
+                maxScore=score[i];
+            }
         }
         System.out.println(Arrays.toString(score));
         return result;
