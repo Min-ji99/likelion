@@ -22,6 +22,7 @@ class PrepareTestTest {
     }
     @Test
     void case1(){
+        //assertArrayEquals : 배열의 값 비교
         assertArrayEquals(result2, prepareTest.solution(answers2));
     }
     @Test
