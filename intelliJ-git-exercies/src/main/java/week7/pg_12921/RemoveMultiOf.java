@@ -6,7 +6,22 @@ import java.util.List;
 
 public class RemoveMultiOf {
     public int solution(int num){
-        //int answer=0;
+        boolean[] checks = new boolean[num+1]; //소수가 아니면 true, 소수이면 false
+        checks[0]=checks[1]=true;
+
+        for(int i=2; i*2<=num; i++){
+            checks[2*i]=true;
+        }
+        int count=0;
+        for(int i=2; i<=num; i++){
+            if(!checks[i]) {
+                count+=1;
+                System.out.println(i);
+            }
+        }
+        return count;
+        /*
+        //list 이용한 에라토스테네스의 체
         List<Integer> numbers=new ArrayList<>();
         //2부터 num까지 숫자가 들어있는 List 만들기
         for(int i=2; i<=num; i++){
@@ -25,5 +40,6 @@ public class RemoveMultiOf {
         }
         //소수 개수 출력
         return numbers.size();
+         */
     }
 }
