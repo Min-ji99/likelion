@@ -9,10 +9,13 @@ public class RemoveMultiOf {
         boolean[] checks = new boolean[num+1]; //소수가 아니면 true, 소수이면 false
         checks[0]=checks[1]=true;
 
-        for(int i=2; i*2<=num; i++){
-            checks[2*i]=true;
+        for(int j=2; j*j<=num; j++) {
+            for (int i = j; i * j <= num; i+=1) {
+                checks[j * i] = true;
+            }
         }
         int count=0;
+
         for(int i=2; i<=num; i++){
             if(!checks[i]) {
                 count+=1;
