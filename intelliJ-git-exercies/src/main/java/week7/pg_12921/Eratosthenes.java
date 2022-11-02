@@ -4,10 +4,11 @@ package week7.pg_12921;
 public class Eratosthenes {
     public int solution(int num){
         boolean prime[]=new boolean[num+1];
-        prime[0]=prime[1]=true;
+        prime[0]=prime[1]=true; //소수면 false, 소수가 아니면 true
         for(int i=2; i*i<=num; i++){
             if(!prime[i]){
-                // prime[j] 소수가 아닌 표시
+                //i*i부터 i의 배수 다 소수에서 제거
+                //i가 6일때 6*2, 6*3, 6*4, 6*5는 앞에서 2, 3, 4, 5의 배수 제거가 이미 되어있음
                 for(int j=i*i; j<=num; j+=i) prime[j] = true;
             }
         }
