@@ -6,21 +6,24 @@ import java.util.List;
 
 public class RemoveMultiOf {
     public int solution(int num){
-        int answer=0;
+        //int answer=0;
         List<Integer> numbers=new ArrayList<>();
-        //1.2부터 num까지 숫자가 들어있는 List 만들기
+        //2부터 num까지 숫자가 들어있는 List 만들기
         for(int i=2; i<=num; i++){
             numbers.add(i);
         }
-        //2. 리스트에서 2를 제외한 모든 2의 배수 제거하기
-        for(int i=2; i*2<=num; i++){
-            if(numbers.indexOf(2*i)>-1) {
-                numbers.remove(numbers.indexOf(2*i));
+        //리스트에서 자기 자신을 제외한 모든 배수 지우기(num의 제곱근까지)
+        for(int i=2; i*i<=num; i++) {
+            for (int j =2; j * i <= num; j++) {
+                if (numbers.indexOf(i * j) > -1) {
+                    numbers.remove(numbers.indexOf(i * j));
+                }
             }
         }
         for(Integer number:numbers){
             System.out.println(number);
         }
-        return answer;
+        //소수 개수 출력
+        return numbers.size();
     }
 }

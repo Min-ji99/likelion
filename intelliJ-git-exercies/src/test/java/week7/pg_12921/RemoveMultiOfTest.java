@@ -16,6 +16,6 @@ class RemoveMultiOfTest {
     }
     @Test
     void case1(){
-        removeMultiOf.solution(50);
+        assertEquals(15, removeMultiOf.solution(50));
     }
 }
