@@ -6,23 +6,13 @@ import java.util.List;
 
 public class RemoveMultiOf {
     public int solution(int num){
-        boolean[] checks = new boolean[num+1]; //소수가 아니면 true, 소수이면 false
-        checks[0]=checks[1]=true;
+        int n=50;
+        int[] nums=new int[n-1];
+        boolean[] checks=new boolean[nums.length];
 
-        for(int j=2; j*j<=num; j++) {
-            for (int i = j; i * j <= num; i+=1) {
-                checks[j * i] = true;
-            }
-        }
-        int count=0;
+        Arrays.fill(checks, true);
 
-        for(int i=2; i<=num; i++){
-            if(!checks[i]) {
-                count+=1;
-                System.out.println(i);
-            }
-        }
-        return count;
+        for(int i=0; i<nums.length; i++) nums[i]=i+2;
         /*
         //list 이용한 에라토스테네스의 체
         List<Integer> numbers=new ArrayList<>();
