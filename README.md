@@ -95,3 +95,15 @@
 |----|----|----|
 |알고리즘|스택|[PG_12909 올바른 괄호](https://school.programmers.co.kr/learn/courses/30/lessons/12909)|
 |Spring||StatementStrategy, AddStrategy, DeleteAllStrategy|
+
+## week6
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|정렬|[프로그래머스 가장 큰수](https://school.programmers.co.kr/learn/courses/30/lessons/12921)|
+|알고리즘|해시|[프로그래머스 폰켓몬](https://school.programmers.co.kr/learn/courses/30/lessons/1845), [프로그래머스 완주하지 못한 선수](https://school.programmers.co.kr/learn/courses/30/lessons/42576), [프로그래머스 전화번호목록](https://school.programmers.co.kr/learn/courses/30/lessons/42577)|
+
+## week7
+|학습내용|분류|예제|
+|----|----|----|
+|알고리즘|소수찾기(에라토스테네스의 체)|[프로그래머스 소수찾기](https://school.programmers.co.kr/learn/courses/30/lessons/12921)|
+|알고리즘|소수찾기, 순열|[프로그래머스 소수찾기](https://school.programmers.co.kr/learn/courses/30/lessons/42839)|
