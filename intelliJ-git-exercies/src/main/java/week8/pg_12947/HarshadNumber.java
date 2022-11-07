@@ -9,9 +9,16 @@ public class HarshadNumber {
         }
         return sum;
     }
+    public boolean checkRemainder(int x, int sum){
+        if(x%sum==0){
+            return true;
+        }
+        return false;
+    }
     public boolean solution(int x) {
         boolean answer = true;
         int sum=sumOfDigits(x);
+        answer=checkRemainder(x, sum);
         return answer;
     }
 }
