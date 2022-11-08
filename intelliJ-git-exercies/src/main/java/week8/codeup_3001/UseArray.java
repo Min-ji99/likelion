@@ -1,8 +1,8 @@
-package week8;
+package week8.codeup_3001;
 
 import java.util.Scanner;
 
-public class Codeup_3001 {
+public class UseArray {
     public int findUseLoop(int value, int n, int[] arr){
         int idx=-1;
         for(int i=0; i<n; i++){
@@ -13,7 +13,7 @@ public class Codeup_3001 {
     }
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        Codeup_3001 codeup=new Codeup_3001();
+        UseArray codeup=new UseArray();
 
         int n=sc.nextInt();
         int[] arr=new int[n];
