@@ -3,7 +3,7 @@ package week8;
 import java.util.Scanner;
 
 public class Codeup_3001 {
-    public static int findUseLoop(int value, int n, int[] arr){
+    public int findUseLoop(int value, int n, int[] arr){
         int idx=-1;
         for(int i=0; i<n; i++){
             if(value==arr[i]) idx=i;
@@ -21,6 +21,6 @@ public class Codeup_3001 {
             arr[i]=sc.nextInt();
         }
         int value=sc.nextInt();
-        System.out.println(findUseLoop(value, n, arr));
+        System.out.println(codeup.findUseLoop(value, n, arr));
     }
 }
