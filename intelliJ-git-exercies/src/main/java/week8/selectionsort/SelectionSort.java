@@ -24,21 +24,11 @@ public class SelectionSort {
         int[] arr=new int[]{2, 7, 4, 9, 10, 223, 111, 23, 3, 39};
         SelectionSort selectionSort=new SelectionSort();
         //내림차순 정렬
-        selectionSort.sorting(arr, new StatementStrategy(){
-            @Override
-            public boolean compare(int idx, int a) {
-                return idx<a;
-            }
-        } );
+        selectionSort.sorting(arr, (a, b)-> a<b);
         System.out.println(Arrays.toString(arr));
 
         //오름차순 정렬
-        selectionSort.sorting(arr, new StatementStrategy(){
-            @Override
-            public boolean compare(int idx, int a) {
-                return idx>a;
-            }
-        } );
+        selectionSort.sorting(arr, (a, b)-> a>b);
         System.out.println(Arrays.toString(arr));
     }
 }
