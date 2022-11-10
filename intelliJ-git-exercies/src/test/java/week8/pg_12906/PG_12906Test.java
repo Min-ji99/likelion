@@ -24,4 +24,9 @@ class PG_12906Test {
         assertArrayEquals(result1, pg_12906.solution(arr1));
         assertArrayEquals(result2, pg_12906.solution(arr2));
     }
+    @Test
+    void solution2Test(){
+        assertArrayEquals(result1, pg_12906.solution2(arr1));
+        assertArrayEquals(result2, pg_12906.solution2(arr2));
+    }
 }
