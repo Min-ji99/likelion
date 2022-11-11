@@ -28,5 +28,6 @@ class PG_17681Test {
     @Test
     void toBinaryStringTest(){
         assertEquals("11111", pg_17681.toBinaryString(31));
+        assertEquals("1010", pg_17681.toBinaryString(10));
     }
 }
