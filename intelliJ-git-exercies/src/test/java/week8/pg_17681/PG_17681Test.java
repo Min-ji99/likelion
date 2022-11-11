@@ -25,4 +25,8 @@ class PG_17681Test {
     void solutionTest(){
         assertArrayEquals(result, pg_17681.solution(n, arr1, arr2));
     }
+    @Test
+    void toBinaryStringTest(){
+        assertEquals("11111", pg_17681.toBinaryString(31));
+    }
 }

@@ -9,15 +9,26 @@ import java.util.Arrays;
     1이면 # 아니면 공백
  */
 public class PG_17681 {
-        public String[] solution(int n, int[] arr1, int[] arr2) {
-            String[] answer = {};
-            String[] maps=new String[arr1.length];
-
-            for(int i=0; i<arr1.length; i++){
-                maps[i]=Integer.toBinaryString(arr1[i]|arr2[i]);
-            }
-
-
-            return answer;
+    public String toBinaryString(int n){
+        String binary="";
+        while (n > 0) {
+            binary+=Integer.toString(n%2);
+            n/=2;
         }
+        return binary;
+    }
+    public String[] solution(int n, int[] arr1, int[] arr2) {
+        String[] answer = {};
+        String[] maps=new String[arr1.length];
+        PG_17681 pg_17681=new PG_17681();
+        for(int i=0; i<arr1.length; i++){
+            maps[i]=pg_17681.toBinaryString(arr1[i]|arr2[i]);
+            System.out.println(maps[i]);
+            maps[i]=maps[i].replace("1", "#");
+            maps[i]=maps[i].replace("0", " ");
+        }
+        System.out.println(Arrays.toString(maps));
+
+        return answer;
+    }
 }
