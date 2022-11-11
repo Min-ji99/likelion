@@ -18,7 +18,7 @@ class PG_17681Test {
         n=5;
         arr1=new int[]{9, 20, 28, 18, 11};
         arr2=new int[]{30, 1, 21, 17, 28};
-        result=new String[]{"#####","# # #", "### #", "# ##", "#####"};
+        result=new String[]{"#####","# # #", "### #", "#  ##", "#####"};
     }
 
     @Test
