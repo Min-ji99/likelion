@@ -11,11 +11,12 @@ import java.util.Arrays;
 public class PG_17681 {
         public String[] solution(int n, int[] arr1, int[] arr2) {
             String[] answer = {};
-            int[] maps=new int[arr1.length];
+            String[] maps=new String[arr1.length];
 
             for(int i=0; i<arr1.length; i++){
-                maps[i]=arr1[i]|arr2[i];
+                maps[i]=Integer.toBinaryString(arr1[i]|arr2[i]);
             }
+
 
             return answer;
         }
