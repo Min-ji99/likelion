@@ -9,9 +9,10 @@ public class Eratosthenes {
             arr[i]=i;
         }
         arr[1]=0;
-        int multipleOf=2;
-        for(int i=multipleOf*2; i<=50; i+=multipleOf){
-            arr[i]=0;
+        for(int multipleOf=2; multipleOf*multipleOf<=50; multipleOf++) {
+            for (int i = multipleOf * 2; i <= 50; i += multipleOf) {
+                arr[i] = 0;
+            }
         }
         System.out.println(Arrays.toString(arr));
     }
