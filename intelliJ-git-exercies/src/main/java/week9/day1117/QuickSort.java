@@ -4,11 +4,9 @@ import java.util.Arrays;
 
 public class QuickSort {
     public int[] sort(int[] arr, int startIdx, int endIdx) {
-
-        int pivot = arr[arr.length / 2];
-        System.out.println(pivot);
-        int leftIdx = 0;
-        int rightIdx = arr.length - 1;
+        int pivot = arr[(startIdx+endIdx) / 2];
+        int leftIdx = startIdx;
+        int rightIdx = endIdx;
 
         while (true) {
             while (arr[leftIdx] < pivot) leftIdx += 1;
@@ -22,6 +20,8 @@ public class QuickSort {
             System.out.printf("leftIdx:%d rightIdx:%d\n", leftIdx, rightIdx); // 5, 6
             System.out.println(Arrays.toString(arr));
         }
+        if(startIdx < rightIdx) sort(arr, startIdx, rightIdx);
+        if(leftIdx < endIdx) sort(arr, leftIdx, endIdx);
         return arr;
     }
     public void swap(int[] arr, int x, int y){
@@ -33,5 +33,6 @@ public class QuickSort {
         var arr = new int[]{20, 18, 5, 19, 40, 50, 5, 25};
         QuickSort quickSort=new QuickSort();
         quickSort.sort(arr, 0, arr.length-1);
+        System.out.println(Arrays.toString(arr));
     }
 }
