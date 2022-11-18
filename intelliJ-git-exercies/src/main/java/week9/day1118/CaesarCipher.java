@@ -12,17 +12,9 @@ public class CaesarCipher {
                 continue;
             }
             if (ch >= 'a' && ch <= 'z') {
-                if (ch + n > 'z') {
-                    answer += (char) (ch + n - 26);
-                }else {
-                    answer+=(char)(ch+n);
-                }
+                answer+=(char)((ch+n-'a')%26+'a');
             }else if(ch>='A' && ch<='Z'){
-                if(ch+n>'Z'){
-                    answer+=(char)(ch+n-26);
-                }else{
-                    answer+=(char)(ch+n);
-                }
+                answer+=(char)((ch+n-'A')%26+'A');
             }
         }
 
