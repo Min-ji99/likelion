@@ -11,13 +11,16 @@ public class CaesarCipher {
                 answer += s.charAt(i);
                 continue;
             }
+            /*
+            ch+n으로 알파벳을 밀어주기
+            a를 빼주면 나머지가 0이면 a 25이면 z
+             */
             if (ch >= 'a' && ch <= 'z') {
                 answer+=(char)((ch+n-'a')%26+'a');
             }else if(ch>='A' && ch<='Z'){
                 answer+=(char)((ch+n-'A')%26+'A');
             }
         }
-
         return answer;
     }
 }
