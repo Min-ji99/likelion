@@ -1,4 +1,4 @@
-package week10.day1112;
+package week10.day1122;
 
 public class SumOfArray {
     public int sum(int[] arr, int i){

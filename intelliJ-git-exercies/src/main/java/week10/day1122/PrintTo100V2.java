@@ -1,4 +1,4 @@
-package week10.day1112;
+package week10.day1122;
 
 public class PrintTo100V2 {
     public static void print1To100(int n) {
