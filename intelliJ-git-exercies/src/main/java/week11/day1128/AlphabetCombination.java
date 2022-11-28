@@ -4,7 +4,9 @@ public class AlphabetCombination {
     private static final String alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static void main(String[] args) {
         for(int i=0; i<alphabet.length(); i++){
-            System.out.println(alphabet.charAt(i));
+            for(int j=0; j<alphabet.length(); j++) {
+                System.out.println(String.valueOf(alphabet.charAt(i)) + String.valueOf(alphabet.charAt(j)));
+            }
         }
     }
 }
