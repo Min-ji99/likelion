@@ -1,8 +1,6 @@
 package week11.day1129;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class NumberOfDigits {
     public static int[] getDigits(int[] arr){
@@ -19,9 +17,30 @@ public class NumberOfDigits {
         Arrays.sort(answer);
         return answer;
     }
+    public static int[] sort(int[] arr, int digit){
+        Queue<Integer>[] queue=new Queue[10];
+        for(int i=0; i<queue.length; i++){
+            queue[i]=new ArrayDeque<>();
+        }
+        for(int i=0; i<arr.length; i++){
+            int divisor=(int)Math.pow(10, digit-1);
+            queue[Math.floorDiv(arr[i], divisor) % 10].add(arr[i]);
+        }
+
+        int idx=0;
+        for(int i=0; i<queue.length; i++){
+            while(!queue[i].isEmpty()){
+                arr[idx++]=queue[i].poll();
+            }
+        }
+        return arr;
+    }
     public static void main(String[] args) {
         int[] arr = new int[]{7, 4, 5, 9, 1, 0, 20};
-        int[] digit=getDigits(arr);
-        System.out.println(Arrays.toString(digit));
+        int[] digits=getDigits(arr);
+        for(var digit:digits){
+            arr=sort(arr, digit);
+            System.out.println(Arrays.toString(arr));
+        }
     }
 }
