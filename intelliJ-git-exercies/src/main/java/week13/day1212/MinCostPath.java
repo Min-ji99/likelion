@@ -11,6 +11,9 @@ public class MinCostPath {
         for(int i=1; i<matrix[0].length; i++){
             dp[0][i]=dp[0][i-1]+matrix[0][i];
         }
+        for(int j=1; j<matrix.length; j++){
+            dp[j][0]=dp[j-1][0]+matrix[j][0];
+        }
         for(int i=0; i< matrix.length; i++) {
             System.out.println(Arrays.toString(dp[i]));
         }
