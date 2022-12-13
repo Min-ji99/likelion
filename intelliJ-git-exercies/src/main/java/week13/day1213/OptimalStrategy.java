@@ -24,9 +24,15 @@ public class OptimalStrategy {
         for(int i=0; i<coins.length; i++){
             dp[i][i]=new Pair(coins[i], 0);
         }
-
-        for(int i=0; i<coins.length; i++){
-            System.out.println(dp[i][i].toString());
+        for(int i=0; i<coins.length;i++){
+            int j=i+1;
+            if(j>=coins.length) break;
+            if(dp[i][j-1].left<dp[i+1][j].left){
+                dp[i][j]=new Pair(dp[i+1][j].left, dp[i][j-1].left);
+            }else{
+                dp[i][j]=new Pair(dp[i][j-1].left, dp[i+1][j].left);
+            }
+            System.out.println(dp[i][j].toString());
         }
     }
 }
