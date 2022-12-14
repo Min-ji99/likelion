@@ -39,7 +39,7 @@ public class OptimalStrategy {
     }
     public static int sumFromTo(int[] coins, int from, int to){
         int sum=0;
-        while(from<to){
+        while(from<=to){
             sum+=coins[from];
             from+=1;
         }
@@ -61,7 +61,11 @@ public class OptimalStrategy {
                 System.out.println("i : "+i+", j : "+j+" "+dp[i][j].toString());
             }
         }
-        System.out.println(sumFromTo(coins, 1, 3));
+        for(int i=0; i<coins.length; i++){
+            for(int j=0; j<coins.length; j++){
+                System.out.println(sumFromTo(coins, i, j));
+            }
+        }
         //System.out.println(dp[0][coins.length-1].toString());
     }
 }
