@@ -1,5 +1,7 @@
 package week13.day1213;
 
+import java.util.Arrays;
+
 class Pair{
     int left;
     int right;
@@ -48,23 +50,33 @@ public class OptimalStrategy {
     public static void main(String[] args) {
         int[] coins=new int[]{2, 7, 40, 19};
         Pair[][] dp=new Pair[coins.length][coins.length];
+        int[][] dpSumFromTo=new int[coins.length][coins.length];
 
         for(int i=0; i<coins.length; i++){
             dp[i][i]=new Pair(coins[i], 0);
         }
 
-        for(int k=1; k<coins.length; k++){
+        /*for(int k=1; k<coins.length; k++){
             for(int i=0; i<coins.length; i++){
                 int j=i+k;
                 if(j>=coins.length) break;
                 dp[i][j]=calcPair(coins, i, j);
                 System.out.println("i : "+i+", j : "+j+" "+dp[i][j].toString());
             }
+        }*/
+        for(int k=0; k<coins.length; k++){
+            for(int i=0; i<coins.length; i++){
+                int j=i+k;
+                if(j>=coins.length) break;
+                if(j==0) {
+                    dpSumFromTo[i][j]=coins[j];
+                    continue;
+                }
+                dpSumFromTo[i][j]=dpSumFromTo[i][j-1]+coins[j];
+            }
         }
         for(int i=0; i<coins.length; i++){
-            for(int j=0; j<coins.length; j++){
-                System.out.println(sumFromTo(coins, i, j));
-            }
+            System.out.println(Arrays.toString(dpSumFromTo[i]));
         }
         //System.out.println(dp[0][coins.length-1].toString());
     }
